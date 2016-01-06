@@ -1,0 +1,114 @@
+﻿<style>
+    .modal-body
+    {
+        max-height:750px;
+        overflow: auto;
+
+    }
+</style>
+<div class="modal-content" ng-init="initialize()">
+    <div class="modal-header">
+
+        <button type="button" class="close" aria-hidden="true" ng-click="cancel()">
+            &times;
+        </button>
+        <h4 class="modal-title">{{lot.address.value}}</h4>
+    </div>
+
+    <div  class="modal-body">
+
+
+        <div class="row" style="padding:10px">
+            <div class="col col-lg-12" ng-repeat="dataListItem in [lot.headerDL]" ng-include="'app/modules/global/views/template-fieldDataListItem.html'">
+               
+            </div>
+        </div>
+        <div class="row" style="padding:10px">
+            <div class="col col-lg-12">
+                <div id="previewMap" style="border:1px solid #ccc; height:300px;padding:10px" ng-if="showPreviewMap">
+                    <ui-gmap-google-map center="mapDto.center" zoom="mapDto.zoom" draggable="false" bounds="mapDto.bounds" options="mapDto.options">
+                        <ui-gmap-polygon ng-repeat="poly in polygons track by $index" path="poly.location" visible="true" editable="false" draggable="false" fill="geoFill" stroke="geoStroke"></ui-gmap-polygon>
+                    </ui-gmap-google-map>
+                </div>
+            </div>
+        </div>
+
+        <ul id="ulImageThumbs">
+            <li>
+                <a href="http://firstindustrial.blob.core.windows.net/firstindustrial/19014_Map1.jpg?635674157862800000" rel="prettyPhoto[pp_gal1]" title="">
+                    <img src="http://firstindustrial.blob.core.windows.net/firstindustrial/19014_Map1_tm.jpg?635674157862800000" class="span1">
+                </a>
+            </li>
+            <li>
+                <a href="http://firstindustrial.blob.core.windows.net/firstindustrial/19014_Map2.jpg?635674157862800000" rel="prettyPhoto[pp_gal1]" title="">
+                    <img src="http://firstindustrial.blob.core.windows.net/firstindustrial/19014_Map2_tm.jpg?635674157862800000" class="span1">
+                </a>
+            </li>
+            <li>
+                <a href="http://firstindustrial.blob.core.windows.net/firstindustrial/19014_Map3.jpg?635674157862800000" rel="prettyPhoto[pp_gal1]" title="">
+                    <img src="http://firstindustrial.blob.core.windows.net/firstindustrial/19014_Map3_tm.jpg?635674157862800000" class="span1">
+                </a>
+            </li>
+            <li>
+                <a href="http://firstindustrial.blob.core.windows.net/firstindustrial/19014_Aerial1.jpg?635674157862800000" rel="prettyPhoto[pp_gal1]" title="">
+                    <img src="http://firstindustrial.blob.core.windows.net/firstindustrial/19014_Aerial1_tm.jpg?635674157862800000" class="span1">
+                </a>
+            </li>
+
+
+        </ul>
+        <div class="page-header"><h2>Profile</h2></div>
+        <h3>Location</h3>
+        <dl class="dl-horizontal">
+            <dt>LINC</dt>
+            <dd>0019133008</dd>
+
+            <dt>Access Lat, Long</dt>
+            <dd>53.6286116, -113.3435943</dd>
+
+            <dt>Legal Description</dt>
+            <dd>1127MC, 1, A</dd>
+
+            <dt>Address</dt>
+            <dd>151-167 Avenue NE, Edmonton</dd>
+            <dt>Subdivision</dt>
+            <dd>Rural Northeast South Sturgeon</dd>
+        </dl>
+
+        <h3>Configuration</h3>
+        <dl class="dl-horizontal">
+            <dt>Area Max (sq. m.)</dt>
+            <dd>100000</dd>
+            <dt>Area Min (sq. m.)</dt>
+            <dd>100000</dd>
+        </dl>
+        <div class="page-header"><h2>Sales</h2></div>
+
+
+        <h3>Sale: March 30, 2014</h3>
+
+
+        <h4>Key Data</h4>
+        <dl class="dl-horizontal">
+            <dt>Sale Date</dt>
+            <dd>March 30, 2014</dd>
+
+
+
+
+
+            <dt>Foreclosure</dt>
+            <dd>To Be Determined</dd>
+        </dl>
+
+
+        <h4>End Use Profile</h4>
+        <dl class="dl-horizontal">
+            <dt>Future Land Use</dt>
+            <dd>To be determined</dd>
+            <dt>End User Industry</dt>
+            <dd>Healthcare</dd>
+        </dl>
+
+    </div>
+</div>

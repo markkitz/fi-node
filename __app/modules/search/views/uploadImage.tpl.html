@@ -1,0 +1,11 @@
+﻿<div id="content" style="margin: 20px;">
+    <h1>Image Upload</h1>
+    <button class="btn btn-primary" onclick="$('#fileUpload').trigger('click');" style="margin: 10px 0 0 10px;">Browse...</button>
+    <input id="fileUpload" style="display: none;" type="file" ng-file-select ng-file-change="onFileSelect($files)"
+           accept="image/png,image/jpeg,image/jpg" />
+    <p style="color: red; margin: 10px; display: block;" ng-bind-html="errorMessage | paragraph"></p>
+    <div class="progress" ng-show="percent > 0">
+        <div style="width: {{percent}}%;" class="progress-bar bg-color-greenLight"></div>
+    </div>
+    <button class="btn btn-danger center-block" style="margin-top: 30px; width: 100px;" ng-click="cancel()">Cancel</button>
+</div>

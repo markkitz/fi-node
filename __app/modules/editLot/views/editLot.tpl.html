@@ -1,0 +1,165 @@
+﻿<style>
+    i.profile {
+        color: #3276B1;
+    }
+
+    i.sales {
+        color: #57BB8A;
+    }
+
+    i.supply {
+        color: #A1887F;
+    }
+
+    i.taxation {
+        color: #EDAC1C;
+    }
+
+    i.zoning {
+        color: #CE2955;
+    }
+
+    i.landTitles {
+        color: #B629CE;
+    }
+
+    div.cg-hdr-icon > i.fa {
+        font-size: 15px;
+    }
+
+    .cg-hdr-icon {
+        width: 60px;
+        padding-top: 15px;
+        padding-bottom: 15px;
+        padding-left: 20px;
+    }
+
+     .kitz-forms
+        {
+            margin-bottom:20px;
+        }
+        .kitz-forms section
+        {
+            flex-direction:column;
+            margin:0px 10px;
+        }
+        .kitz-forms label{
+            display:block;
+            font-weight:normal;
+        }
+        .kitz-forms input[type=text]
+        {
+            width:100%;
+            padding:5px 10px;
+        }
+        .kitz-forms input[type=text]
+        {
+            width:100%;
+            padding:5px 10px;
+        }
+        .kitz-forms select
+        {
+            padding:5px 10px;
+           
+        }
+        
+        .kitz-forms-row{
+            display:flex;
+            margin-top:20px;
+        }
+        .kitz-forms header
+        {
+                display: block;
+                width: 100%;
+                padding: 0;
+                margin-bottom: 0pt;
+                margin-top: 10pt;
+                font-size: 14.5pt;
+                line-height: 28pt;
+                color: #333333;
+                border: 0;
+                border-bottom: 1px solid #e5e5e5;
+        }
+
+        @media (min-width: 1680px) {
+            .kf-flex-form-8-5, .kf-flex-form-5-8,  .kf-flex-form-6-6
+            {
+                display:flex;
+            }
+            .kf-flex-form-8-5> div:first-child
+            {
+                width:800px;
+
+            }
+            .kf-flex-form-8-5> div:nth-child(2)
+            {
+                width:450px;
+                margin-left:50px;
+
+            }
+            .kf-flex-form-5-8> div:first-child
+            {
+                width:450px;
+
+            }
+            .kf-flex-form-5-8> div:nth-child(2)
+            {
+                width:800px;
+                margin-left:50px;
+            }
+            .kf-flex-form-6-6> div:first-child
+            {
+                width:600px;
+
+            }
+            .kf-flex-form-6-6> div:nth-child(2)
+            {
+                width:600px;
+                margin-left:50px;
+            }
+
+        }
+</style>
+
+<div ng-init="initialize()" style="margin:10px;">
+
+    <div style="margin-bottom:10px;margin-left:20px;font-size:14pt">{{address}}</div>
+    <div ng-repeat="cg in rowGroups" class="cg" ng-class="{selected: cg.selected}" >
+        <div class="cg-close-btn " ng-if="cg.selected" ng-click="closeGroup(cg)"><i class="glyphicon glyphicon-remove"></i></div>
+        <div class="cg-hdr" ng-hide="cg.selected" ng-click="groupClick(cg)">
+            <div class="cg-hdr-icon">
+                <i class="fa fa-circle {{cg.style}}"></i>
+            </div>
+            <div class="cg-hdr-ttl" style="font-weight:bold">
+                {{cg.title}} <span ng-show="cg.rows.length > 1 && cg.title != 'Profile'">({{cg.rows.length}})</span>
+            </div>
+        </div>
+        <div class="cg-multgrp" ng-if="cg.selected">
+            <h2>{{cg.title}}</h2>
+            <div ng-if="cg.addBar" style="margin-left:20px; margin-bottom:20px;padding:5px;">
+                <button class="btn btn-primary" ng-click="addSubEntity(cg)">{{cg.addBarText}}</button>
+            </div>
+            <div class="cg-sg-c" ng-repeat="c in cg.rows" ng-class="{selected: c.selected}">
+                <div class="cg-sg-c-hdr" style="display:flex" ng-click="rowClick(c)">
+                    <div class="cg-hdr-icon">
+                        <i class="fa  fa-circle {{cg.style}}"></i>
+                    </div>
+                    <div class="cg-hdr-ttl" style="flex:1">
+                        <span>{{c.heading}}</span>
+                    </div>
+                    <div class="cg-act-icon"  ng-show="c.showDelete && c.selected">
+                        <i class="glyphicon glyphicon-trash" ng-click="deleteSubEntity(c, $event)"></i>
+                    </div>
+                </div>
+                <div class="cc-cntnt kitz-forms" ng-if="c.selected">
+                        <div class="isLoadingDiv" ng-show="isSubEnityLoading">
+                            <i class="fa fa-spin fa-refresh"></i> Loading 
+                        </div>
+                        <div ui-view="contentLotChild" ng-hide="isSubEnityLoading"></div>            
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>

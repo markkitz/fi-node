@@ -1,0 +1,251 @@
+﻿<style>
+    .smart-form section.col, .fullRow {
+        padding-right: 4px !important;
+        padding-left: 4px !important;
+    }
+
+    div.rating {
+        width: 100px;
+    }
+
+    div.btn-group button {
+        padding: 6px 12px;
+    }
+
+    .savingControl {
+        background-color: #FFFFCC;
+    }
+
+    .editOptions {
+        font-size: 11px;
+        display: block;
+    }
+
+    .label {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap !important;
+    }
+
+    div.ui-multiselect {
+        max-height: 130px;
+        overflow: auto;
+    }
+
+    .smart-form header {
+        color: #000 !important;
+        font-weight: bold;
+    }
+
+    #map_canvas {
+        margin: 0;
+        padding: 0;
+        height: 300px;
+    }
+
+    ul#ulImageThumbs {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        display: block;
+        margin-top: 20px;
+    }
+
+        ul#ulImageThumbs li {
+            display: inline;
+            float: left;
+            margin-right: 3px;
+            border: 1px solid #ccc;
+            margin-bottom: 3px;
+        }
+
+            ul#ulImageThumbs li a img {
+                height: 45px;
+            }
+
+    ul#ulAddLincs, ul#ulLotsPreview {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+    }
+
+        ul#ulAddLincs li, ul#ulLotsPreview li {
+         
+            padding-bottom: 3px;
+            padding-top: 3px;
+            border-bottom: 1px solid #ccc;
+            margin:5px 0px;
+        }
+
+            ul#ulAddLincs li:last-child, ul#ulLotsPreview li:last-child {
+                border-bottom-width: 0px !important;
+            }
+
+     .btn {
+        padding: 6px 10px 6px 10px !important;
+    }
+
+     .btn-label {
+        margin-top: -6px !important;
+        margin-bottom: -6px !important;
+    }
+</style>
+<div id="content" ng-init="initialize()" >
+    <div style="background-color:#666;padding:10px">
+        <div class="row">
+            <div class="col col-md-7 col-sm-12" style="font-size: 22px; color: #eee; padding-left: 25px; overflow: hidden; white-space: nowrap; text-overflow:ellipsis;padding-bottom:5px">
+                <i class="fa fa-folder"></i> {{identifier.value}}
+            </div>
+            <div class="col col-md-5 col-sm-12" style="text-align:right">
+                <div class="btn-group ng-scope">
+                    <button type="button" class="btn  ng-binding ng-scope ">Preview</button>
+                    <button type="button" class="btn  ng-binding ng-scope">Quick Edit</button>
+                    <button type="button" class="btn  ng-binding ng-scope btn-primary">Full Edit</button>
+                </div>
+                <button class="btn btn-danger">Delete</button>
+            </div>
+        </div>
+
+    </div>
+    <div style="padding: 18px 14px;max-width:1200px;">
+        <div style="padding:18px 14px">
+            <div class="row">
+                <article class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                    <div class="jarviswidget" id="wid-id-x" data-widget-colorbutton="false" data-widget-editbutton="false" data-widget-togglebutton="false" data-widget-deletebutton="false" data-widget-fullscreenbutton="false" data-widget-custombutton="false" data-widget-sortable="false" role="widget">
+                        <header role="heading">
+                            <h2 class="ng-binding">Group Lots</h2>
+                            <span class="jarviswidget-loader"><i class="fa fa-refresh fa-spin"></i></span>
+                        </header>
+                        <div role="content" style="min-height:303px">
+                            <div class="alert alert-warning" ng-hide="identifier.value">
+                                <i class="fa-fw fa fa-warning"></i>
+                                <strong>Required</strong> Enter in a value for the group/set identifier.
+                            </div>
+                            <form class="smart-form">
+                                <ul id="ulLotsPreview">
+                                    <li class="row" style="font-weight:bold">
+                                        <div class="col col-6">
+                                            Lots
+                                        </div>
+                                        <div class="col col-6 text-right">parcel area (acres)</div>
+                                    </li>
+                                    <li class="row" ng-repeat="lot in collectionLots">
+                                        <div class="col col-10">
+                                            <div ng-show="lot.MunicipalAddress.length">{{lot.MunicipalAddress}}</div>
+                                            <div ng-show="lot.LINC.length">LINC: {{lot.LINC}}</div>
+                                            <div ng-show="lot.Plan.length">Legal Description: {{lot.Plan}}, {{lot.Block}}, {{lot.Lot}}</div>
+                                        </div>
+                                        <div class="col col-2  text-right" style="color:#000">
+                                            {{lot.ParcelAreaAcres | number:2}}
+                                        </div>
+
+                                    </li>
+                                    <li class="row" style="font-weight:bold">
+                                        <div class="col col-10">
+                                            Total Parcel Area
+                                        </div>
+                                        <div class="col col-2   text-right">
+                                            {{parcelArea.value | number:2}}
+                                        </div>
+                                    </li>
+
+                                </ul>
+                            </form>
+                        </div>
+                    </div>
+                </article>
+                <article class="col-xs-12 col-sm-6 col-md-6 col-lg-6" ng-include="'app/modules/global/views/template-map.html'"></article>
+            </div>
+        </div>
+        <div class="row">
+            <article class="col-sm-12 sortable-grid ui-sortable">
+                <div class="jarviswidget " id="wid-id-x" data-widget-colorbutton="false" data-widget-editbutton="false" data-widget-togglebutton="false" data-widget-deletebutton="false" data-widget-fullscreenbutton="false" data-widget-custombutton="false" data-widget-sortable="false" role="widget">
+                    <header role="heading">
+                        <ul class="nav nav-tabs pull-left in">
+                            <li>
+                                <a data-toggle="tab" href="#tabHistory">History</a>
+                            </li>
+                            <li>
+                                <a data-toggle="tab" href="#tabSales">Sales</a>
+                            </li>
+                            <li class="active">
+                                <a data-toggle="tab" href="#tabProfile">Profile</a>
+                            </li>
+                            
+                            <li>
+                                <a data-toggle="tab" href="#tabNotes">Notes</a>
+                            </li>
+                           
+                        </ul>
+                        <span class="jarviswidget-loader"><i class="fa fa-refresh fa-spin"></i></span>
+                    </header>
+
+                    <!-- widget div-->
+                    <div role="content">
+                        <div class="widget-body">
+                            <div class="tab-content">
+                                <div class="tab-pane " id="tabHistory">
+                                    <h1>History</h1>
+                                </div>
+                                <div class="tab-pane " id="tabSales">
+                                    <h1>Sales</h1>
+                                </div>
+                                <div class="tab-pane active" id="tabProfile">
+                                    <form class="smart-form">
+                                        <div class="row">
+                                            <div class="col col-8">
+                                                <div ng-repeat="fieldSet in [fieldsetLotCollectionsSettings]" ng-include="'app/modules/global/views/template-fieldSet.html'"></div>
+
+                                                <header>Lots</header>
+                                                <ul id="ulAddLincs">
+                                                    <li class="row" ng-repeat="lot in collectionLots">
+                                                        <div class="col-md-10 col-sm-12">
+                                                            <dl class="dl-horizontal">
+                                                                <dt>LINC</dt>
+                                                                <dd>{{lot.LINC}}</dd>
+                                                                <dt ng-show="lot.Plan.length">Legal Description</dt>
+                                                                <dd ng-show="lot.Plan.length">{{lot.Plan}}, {{lot.Block}}, {{lot.Lot}}</dd>
+                                                                <dt ng-show="lot.Portion.length">ATS Description</dt>
+                                                                <dd ng-show="lot.Portion.length">{{lot.Portion}} {{lot.Section}} {{lot.Township}} {{lot.Range}} {{lot.Meridian}}</dd>
+                                                                <dt ng-show="lot.MunicipalAddress.length">Municipal Address</dt>
+                                                                <dd ng-show="lot.MunicipalAddress.length">{{lot.MunicipalAddress}}</dd>
+                                                                <dt ng-show="lot.ParcelAreaAcres != null">Parcel Area (acres)</dt>
+                                                                <dd ng-show="lot.ParcelAreaAcres != null">{{lot.ParcelAreaAcres | number:2}}</dd>
+
+                                                            </dl>
+                                                        </div>
+                                                        <div class="col-md-2  col-sm-12">
+                                                            <a href="javascript:void(0);" class="btn  btn-primary" ng-click="editLotCollectionLot(lot)"> <i class="glyphicon glyphicon-pencil"></i></a>
+                                                            <a href="javascript:void(0);" class="btn  btn-danger" ng-click="deleteLotCollectionLot(lot.LINC)"> <i class="glyphicon glyphicon-trash"></i></a>
+                                                        </div>
+                                                    </li>
+
+                                                    <li>
+                                                        <a href="javascript:void(0);" ng-click="addLot()" class="btn btn-labeled btn-primary"> <span class="btn-label"><i class="glyphicon glyphicon-plus"></i></span>Add Linc </a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            <div class="col col-4">
+                                                <div ng-repeat="fieldSet in [fieldsetLotCollectionsLocation]" ng-include="'app/modules/global/views/template-fieldSet.html'"></div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                                <div class="tab-pane " id="tabNotes">
+                                    <h1>Notes</h1>
+                                </div>
+                                <div class="tab-pane " id="tabLandTitles">
+                                    <h1>Land Titles</h1>
+                                </div>
+                            </div>
+
+                        </div>
+                        <!-- end widget content -->
+                    </div>
+                    <!-- end widget div -->
+                </div>
+            </article>
+        </div>
+        
+    </div>
+</div>

@@ -1,0 +1,52 @@
+﻿<style>
+    .marktable{
+        margin-left:20px;
+        margin-right:20px;
+        margin-top:10px;
+    }
+    .marktable td
+    {
+        padding:5px;
+    }
+    .marktable input[type="text"] 
+    {
+        padding:5px;
+        width:150px;
+    }
+    .addFlowBtn
+    {
+        margin-top:10px;
+        margin-left:20px;
+
+    }
+    .kf-RAILSERVICE select, .kf-RAILSUPPLIER select
+    {
+        width:200px;
+    }
+
+</style>
+<div ng-init="initialize()" class="kf-flex-form-5-8">    
+    <div ng-repeat="fieldSet in [fieldSetTransportation]" ng-include="'app/modules/global/views/template-fieldSet.html'"></div>
+    <div>
+        <header>Traffic Flow</header>
+        <a href="javascript:void(0)" ng-click="addTrafficFlow()" class="btn btn-sm  btn-primary addFlowBtn">Add</a>
+        <table class="table table-bordered marktable" ng-show="trafficFlows.length">
+            <thead>
+                <tr>
+                    <th>Year</th>
+                    <th>Location</th>
+                    <th>Annual Weekday Average</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tr ng-repeat="flow in trafficFlows">
+                <td><input type="text" ng-blur="editTrafficFlow(flow)" ng-model="flow.flowYear" ng /></td>
+                <td><input type="text" ng-blur="editTrafficFlow(flow)" ng-model="flow.flowLocation" /></td>
+                <td><input type="text" ng-blur="editTrafficFlow(flow)" ng-model="flow.flowAmount" /></td>
+                <td>
+                    <a href="javascript:void(0);" class="btn btn-sm btn-danger" ng-click="deleteTrafficFlow(flow)"><i class="fa fa-trash-o"></i></a>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>

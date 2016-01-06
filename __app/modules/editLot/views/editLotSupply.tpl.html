@@ -1,0 +1,32 @@
+﻿<style>
+    .supplyPage  section[class^="kf-"]>select, .supplyPage  section[class^="kf-"]>label>select,
+    .supplyPage  section[class^="kf-SUPPLY"] input[type=text]
+    {
+        width:250px;
+    }
+    .supplyPage .kf-EventDate
+    {
+        width:250px;
+    }
+    .kf-SUPPLYBROCHURE
+    {
+        width:300px;
+    }
+    .kf-SUPPLYREMARKS textarea
+    {
+        width: 300px;
+    }
+
+
+        
+</style>
+<div ng-init="initialize()" class="supplyPage kf-flex-form-6-6">
+    <div>
+        <div ng-repeat="fieldSet in [fieldSetKeyData]" ng-include="'app/modules/global/views/template-fieldSet.html'"></div>
+    </div>
+    <div>
+        <div ng-repeat="fieldSet in [fieldSetDocumentation]" ng-include="'app/modules/global/views/template-fieldSet.html'"></div>
+        <div ng-repeat="fieldSet in [fieldSetPricing]" ng-include="'app/modules/global/views/template-fieldSet.html'"></div>
+        <div ng-repeat="fieldSet in [fieldSetRemarks]" ng-include="'app/modules/global/views/template-fieldSet.html'"></div>
+    </div>
+</div>

@@ -1,0 +1,11 @@
+﻿
+<div ng-init="initializeStatus()">
+    <style>
+        .kf-FIELDNOTES, .kf-CADESTRALSURVEY, .kf-SUBDIVISIONSURVEY
+        {
+            width:400px;
+        }
+    </style>
+    <div ng-repeat="fieldSet in [fieldSetNotes]" ng-include="'app/modules/global/views/template-fieldSet.html'"></div>
+
+</div>

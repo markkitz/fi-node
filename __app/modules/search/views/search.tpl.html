@@ -1,0 +1,425 @@
+﻿<style>
+    .fullRow {
+        padding-left: 15px !important;
+    }
+
+    .colSearchResults {
+        position:fixed;
+        z-index:30;
+        top:75px; 
+        width:350px;
+        bottom: 0;
+        margin-left:12px;
+        padding:20px 10px;        
+        background-color:#fff;
+        overflow: auto;  
+        border:1px solid #ccc;
+    }
+
+    .colSearchResults::-webkit-scrollbar {
+    height: 15px;
+    width: 15px;
+    }
+
+    .colSearchResults::-webkit-scrollbar-button {
+    height: 0;
+    width: 0;
+    }
+
+    .colSearchResults::-webkit-scrollbar-thumb {
+    background-clip: padding-box;
+    background-color: rgba(0,0,0,.3);
+    border: 5px solid transparent;
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    min-height: 20px;
+    min-width: 20px;
+    height: 5px;
+    width: 5px;
+    }
+
+    .colSearchResults::-webkit-scrollbar-thumb:hover, .gb_Uc ::-webkit-scrollbar-thumb:active {
+    background-color: rgba(0,0,0,.4);
+    }
+
+    #ulLandListing {
+        list-style-type: none;
+        padding: 0;
+        display: block;
+        margin-top: 0px;
+        width:320px;
+        margin-right:-10px;
+    }
+
+    #ulLandListing > li {
+     
+        padding: 5px 8px 5px 20px;
+        border-bottom: 1px solid #ccc;
+        cursor: pointer;
+        margin-right: 15px;
+    }
+
+        #ulLandListing > li:hover {
+            background-color: #efefef;
+            padding: 5px 8px 5px 17px;
+            border-left: 3px solid #b1d5f0;
+        }
+
+        #ulLandListing li ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            display: block;
+        }
+
+        #ulLandListing strong {
+            font-size: 14px;
+            font-weight: normal;
+            padding-top: 0px;
+        }
+        #ulLandListing > li img
+        {
+            max-height:70px
+        }
+
+        /*#ulLandsListing > li > ul > li:nth-child(2), #ulLandsListing > li > ul > li:nth-child(3) {
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            font-size: 13px;
+        }*/
+
+        /*#ulLandListing span.badge {
+            margin-left: 2px;
+            font-size: 11px;
+            margin-top: 3px;
+        }
+
+        #ulLandListing span.label {
+            margin-top: 4px;
+        }
+
+        #ulLandListing span.term {
+            margin-left: 2px;
+            font-size: 14px;
+            color: #999;
+            margin-top: -2px;
+        }*/
+
+
+
+    /*.colCoursePage {
+        border: 1px solid #ccc;
+        background-color: #fff;
+        border-left-width: 0px;
+    }
+
+    .colEditPage {
+        padding-left: 0px;
+    }
+
+    #coursePageContent {
+        margin-top: 15px;
+        margin-bottom: 14px;
+        padding: 0px 10px 0px 10px;
+    }
+
+        #coursePageContent h3 {
+            margin-top: 3px;
+        }
+
+        #coursePageContent .row .col-md-9, #coursePageContent .row .col-md-3 {
+            padding: 0px !important;
+        }
+
+    #searchPanel {
+        margin-bottom: 10px;
+        background-color: #fff;
+        border: 1px solid #ccc;
+        margin-right: 5px;
+        margin-left: 5px;
+        padding-left: 8px;
+        padding-bottom: 8px;
+    }*/
+
+    .control-holder-sm, .control-holder-md, .control-holder-lg {
+        margin: 5px;
+        float: left;
+    }
+
+    .control-holder-sm {
+        width: 100px;
+    }
+
+    .control-holder-md {
+        width: 150px;
+    }
+
+    .control-holder-lg {
+        width: 200px;
+    }
+
+
+
+    div.btn-group button {
+        padding: 6px 12px;
+        padding-top: 6px;
+        padding-right: 12px;
+        padding-bottom: 6px;
+        padding-left: 12px;
+    }
+
+
+    .land-selected {
+        background-color: #efefef !important;
+        padding: 5px 8px 5px 17px !important;
+        border-left: 3px solid rgb(66, 133, 244);
+        cursor: default !important;
+    }
+
+    .land-opened {
+    }
+
+    #ulLandListing .dl-horizontal dt {
+        width: 50px !important;
+        font-size: 11px;
+    }
+
+    #ulLandListing .dl-horizontal dd {
+        margin-left: 60px;
+        font-size: 11px;
+    }
+
+   
+
+    ul.ulImageThumbs {
+        list-style-type: none;
+    }
+
+        ul.ulImageThumbs li {
+            float: left;
+            margin: 5px;
+        }
+
+            ul.ulImageThumbs li a img {
+                height: 35px;
+            }
+
+    .smart-form .row {
+        margin: 0 -0px;
+    }
+
+/*    .smart-form a.btn {
+        padding: 6px 12px;
+        padding-top: 6px;
+        padding-right: 12px;
+        padding-bottom: 6px;
+        padding-left: 12px;
+    }*/
+
+    ul#ulAddLincs, ul#ulLotsPreview {
+        list-style-type: none;
+        margin: 0 0 0 20px;
+        padding: 0;
+    }
+
+        ul#ulAddLincs li, ul#ulLotsPreview li {
+            padding-bottom: 3px;
+            padding-top: 3px;
+            border-bottom: 1px solid #ccc;
+            margin: 5px 0px;
+        }
+
+            ul#ulAddLincs li:last-child, ul#ulLotsPreview li:last-child {
+                border-bottom-width: 0px !important;
+            }
+
+    #lotCollectionEditorContentPanel .btn {
+        padding: 6px 10px 6px 10px !important;
+    }
+
+    #lotCollectionEditorContentPanel .btn-label {
+        margin-top: -6px !important;
+        margin-bottom: -6px !important;
+    }
+
+    ul#ulLandListing > li > div > div.col-lg-9 {
+        padding: 2px;
+    }
+
+    #rightPanel {
+        float: left;
+        margin-left:20px;
+        padding-right:20px;
+    }
+
+    ul#ulImageThumbs {
+        list-style-type: none;
+        padding: 0;
+        display: block;
+        margin: 20px 0 20px 0px;
+    }
+
+        ul#ulImageThumbs li {
+            display: inline;
+            float: left;
+            margin-right: 12px;
+            border: 1px solid #bbb;
+            margin-bottom: 3px;
+        }
+
+            ul#ulImageThumbs li a img {
+                height: 120px;
+            }
+
+
+        ul#ulImageThumbs:after {
+            content: '';
+            display: block;
+            clear: both;
+        }
+
+    hr.notop {
+        margin-top: 0;
+    }
+
+    #previewContentPanel div.page-header h2 {
+        font-size: 26px;
+        margin: 18px 0 0;
+        font-weight: 100;
+    }
+
+    #previewContentPanel div.page-header {
+        padding-bottom: 3px;
+    }
+
+    .row {
+        margin-left: 0px !important;
+        margin-right: 0px !important;
+    }
+
+    #rightPanel {
+        width: 100%;
+    }
+
+    /*ul#ulimagethumbs img {
+        filter: grayscale(100%);
+        -webkit-filter: grayscale(100%);
+    }
+
+        ul#ulimagethumbs img:hover {
+            filter: none;
+            -webkit-filter: none;
+        }*/
+
+    
+    .marker-win
+    {
+width:200px
+    }
+
+    .marker-win strong
+    {
+        width: 200px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display:block;
+    }
+            .marker-win .dl-horizontal  {
+
+        margin-bottom:0px;
+    }
+
+
+        .marker-win .dl-horizontal dt {
+        width: 50px !important;
+        font-size: 11px;
+
+    }
+
+    .marker-win .dl-horizontal dd {
+        margin-left: 60px;
+        font-size: 11px;
+
+    }
+
+        div.isLoadingDiv
+    {
+        text-align:center;
+        font-size:14pt;
+        margin:20px;
+            height: 56px;
+    }
+
+</style>
+<div id="content">
+
+    <div class="colSearchResults">  
+        <ul id="ulLandListing" whenscrollends="loadMoreRecords()">
+            <li ng-repeat="land in lands" ng-click="landSelected(land)" ng-class="{'land-selected': selected == land}">
+                <div class="row">
+                    <div ng-class="{'col-lg-9' : land.photoId != null}">
+                        <strong><i class="fa" ng-class="{'fa-folder-o': land.isLotCollection == true, 'fa-map-marker': land.isLotCollection == false}"></i> {{land.heading}}</strong>
+                        <dl class="dl-horizontal">
+                            <dt ng-repeat-start="lv in land.labelValues" ng-show="lv.value">{{lv.label}}</dt>
+                            <dd ng-repeat-end="" ng-show="lv.value">{{lv.value}}</dd>
+                        </dl>
+                        <div ng-show="selected == land">
+                            <div style="clear:both"></div>
+                            <div class="btn-group">
+                                <a href="javascript:void(0);" class="btn btn-xs" ng-class="{'btn-primary' :showMap, 'btn-default' : !showMap }" ng-click="locateLand(land)"><i class="fa fa-map-marker"></i> Locate</a>
+                                <a href="javascript:void(0);" class="btn btn-xs" ng-class="{'btn-primary' :showPreview, 'btn-default' : !showPreview }" ng-hide="land.isLotCollection" ng-click="viewLot(land)"><i class="fa fa-info"></i> View</a>
+                                <a href="javascript:void(0);" class="btn btn-xs" ng-class="{'btn-primary' :showPreview, 'btn-default' : !showPreview }" ng-show="land.isLotCollection" ng-click="viewLotCollection(land)"><i class="fa fa-info"></i> View</a>
+                                <a href="javascript:void(0);" class="btn btn-xs" ng-class="{'btn-primary' :showEditor, 'btn-default' : !showEditor }" ng-hide="land.isLotCollection" ng-click="editLot(land)"><i class="fa fa-pencil"></i> Edit</a>
+                                <a href="javascript:void(0);" class="btn btn-xs" ng-class="{'btn-primary' :showLotCollectionEditor, 'btn-default' : !showLotCollectionEditor }" ng-show="land.isLotCollection" ng-click="editLotCollection(land)"><i class="fa fa-pencil"></i> Edit</a>
+                            </div>
+                        </div>
+                    </div>
+                    <img class="col-lg-3" ng-if="land.photoId" ng-src="{{land.photoUrl}}">
+                </div>
+            </li>
+            <li ng-show="isLoading">Loading...</li>
+        </ul>        
+    </div>    
+    <div style="margin-left:360px">        
+        <div id="rightPanel">
+            <div ng-show="isLoading"><h1 class="ajax-loading-animation center-block" style="width: 120px; padding: 100px 0;"><i class="fa fa-cog fa-spin"></i> Loading...</h1></div>
+            <div style="max-width:1600px" ng-show="(showEditor || showLotCollectionEditor) && !isLoading">
+                <div ui-view="contentLot"></div>
+            </div>
+            <div ui-view="contentMap" ng-show="showMap && !isLoading"></div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    window.onload = tableHeightSize();
+
+    $(window).resize(function () {
+        tableHeightSize();
+    });
+    function tableHeightSize() {
+        setHeight();
+        //scrollbar screws up height calculation, so to it twice.
+        setTimeout(function () {
+            setHeight();
+
+        }, 500);
+    }
+    function setHeight() {
+        var tableHeight = $(window).height() - 180 ;
+        var editorHeight = tableHeight - 20;
+        var mapHeight = tableHeight + 30;
+        $('.table-wrap').css('height', tableHeight + 'px');
+        $('#searchPanel-controls').css('width', ($('#searchPanel').width() - 300) + 'px');
+        $('#previewContentPanel').css('height', tableHeight + 30 + 'px');
+
+        $('#editorContentPanel').css('height', editorHeight + 'px');
+        $('#map_canvas').css('height', mapHeight + 'px');
+
+        $('#previewMap').css('height', '400px');
+        $('#lotCollectionEditorContentPanel').css('height', editorHeight + 'px');
+        console.log("set height");
+    }
+</script>

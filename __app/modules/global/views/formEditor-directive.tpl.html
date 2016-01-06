@@ -1,0 +1,21 @@
+﻿<label class="{{inputClass[input]}}">
+    <span ng-switch="input">
+        <input ng-switch-when="textbox" type="text" ng-model="$parent.model" data-field="{{field}}" ng-blur="blur({e: $event})" ng-required="require" placeholder="{{placeholder}}" />
+        <textarea ng-switch-when="textarea" class="custom-scroll" rows="{{textareaRows}}" ng-model="$parent.model" data-field="{{field}}" ng-blur="blur({e: $event})" ng-required="require" placeholder="{{placeholder}}"></textarea>
+        <span ng-switch-when="checkbox"><input type="checkbox" id="chk-{{$id}}" ng-model="$parent.model" data-field="{{field}}" ng-change="change({e: $id})" /><i /></span>
+        <select ng-switch-when="dropdown" class="input-sm" ng-model="$parent.model" data-field="{{field}}" ng-options="key as prop for (key, prop) in dropdownData" ng-blur="blur({e: $event})" ng-required="require" style="-moz-appearance: button-arrow-down; -webkit-appearance: menulist-button;">
+            <option value=""></option>
+        </select>
+        <select ng-switch-when="dropdownWithId" class="input-sm" ng-model="$parent.model" data-field="{{field}}" ng-options="item.id as item.name for item in dropdownData" ng-blur="blur({e: $event})" ng-required="require" style="-moz-appearance: button-arrow-down; -webkit-appearance: menulist-button;">
+            <option value=""></option>
+        </select>
+        <input ng-switch-when="decimal" type="number" step="any" ng-model="$parent.model" data-field="{{field}}" ng-blur="blur({e: $event})" ng-required="require" min="{{positive ? '0' : ''}}" style="-moz-appearance: textfield;" placeholder="{{placeholder}}" />
+        <input ng-switch-when="integer" type="number" step="1" pattern="\d*" ng-model="$parent.model" data-field="{{field}}" ng-blur="blur({e: $event})" ng-required="require" style="-moz-appearance: textfield;" placeholder="{{placeholder}}" />
+    </span>
+    <label class="input {{input != 'checkbox' ? 'checkbox input-tooltip' : ''}}" ng-if="tooltipMsg">
+        <b ng-if="input != 'checkbox'" class="icon-append fa fa-question-circle icon-noborder" />
+        <i ng-if="input == 'checkbox'" class="icon-append fa fa-question-circle icon-noborder" />
+        <input tabindex="-1" />
+        <p class="tooltip tooltip-top-{{input != 'checkbox' ? 'right' : 'left'}}" ng-bind-html="tooltipMsg"></p>
+    </label>
+</label>

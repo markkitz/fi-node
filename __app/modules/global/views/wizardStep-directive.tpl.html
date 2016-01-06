@@ -1,0 +1,13 @@
+﻿<div class="wizard">
+    <ul>
+        <li ng-repeat="s in steps" class="{{$index == $parent.currentStep ? 'active' : 'complete'}}" ng-click="$parent.currentStep = $index">{{s}}<span class="chevron" /></li>
+    </ul>
+    <div class="actions">
+        <button type="button" class="btn btn-sm btn-primary btn-prev" ng-disabled="currentStep == 0" ng-click="currentStep = currentStep - 1">
+            <i class="fa fa-arrow-left"></i>Prev
+        </button>
+        <button type="button" class="btn btn-sm btn-success btn-next" ng-disabled="currentStep == steps.length - 1" ng-click="currentStep = currentStep + 1">
+            Next<i class="fa fa-arrow-right"></i>
+        </button>
+    </div>
+</div>

@@ -1,0 +1,36 @@
+﻿<div class="jarviswidget" data-widget-editbutton="false" data-widget-fullscreenbutton="false" data-widget-custombutton="false" data-widget-sortable="false" role="widget" style="margin-bottom:0px">
+
+    <header role="heading">
+        <div class="jarviswidget-ctrls" role="menu">
+
+            <a href="javascript:void(0);" class="button-icon jarviswidget-delete-btn" rel="tooltip" title="" data-placement="bottom" data-original-title="Close" ng-click="EditorClose()">
+                <i class="fa fa-times"></i>
+            </a>
+        </div>
+        <div class="widget-toolbar hidden-phone" role="menu">
+            <div class="smart-form">
+                <label class="toggle">
+                    <input type="checkbox" id="demo-switch-to-pills" name="checkbox-toggle">
+                    <i data-swchon-text="TRUE" data-swchoff-text="FALSE"></i>Quick Edit
+                </label>
+            </div>
+        </div>
+        <ul class="nav nav-tabs pull-left in">
+            <li class="active">
+                <a data-toggle="tab" href="javascript:void(0)" ng-click="ChangeState('profile')">Profile</a>
+            </li>
+            <li>
+                <a data-toggle="tab" href="javascript:void(0)" ng-click="ChangeState('sales')">Sales</a>
+            </li>
+            <li>
+                <a data-toggle="tab" href="javascript:void(0)" ng-click="ChangeState('notes')">Notes</a>
+            </li>
+
+        </ul>
+        <span class="jarviswidget-loader"><i class="fa fa-refresh fa-spin"></i></span>
+    </header>
+
+    <!-- widget div-->
+    <div ui-view="contentLotCollectionChild"></div>
+
+</div>

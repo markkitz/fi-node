@@ -1,0 +1,46 @@
+﻿<div ng-init="initialize()">
+    <div class="widget-body" id="lotCollectionEditorContentPanel" style="overflow-y: scroll;">
+        <form class="smart-form">
+            <div class="tab-content">
+                <div class="row">
+                        <div class="col col-8">
+                            <h1>{{identifier.value}}</h1>
+                            <div ng-repeat="fieldSet in [fieldsetLotCollectionsSettings]" ng-include="'app/modules/global/views/template-fieldSet.html'"></div>
+
+                            <header>Lots</header>
+                            <ul id="ulAddLincs">
+                                <li class="row" ng-repeat="lot in collectionLots">
+                                    <div class="col-md-10 col-sm-12">
+                                        <dl class="dl-horizontal">
+                                            <dt>LINC</dt>
+                                            <dd>{{lot.LINC}}</dd>
+                                            <dt ng-show="lot.Plan.length">Legal Description</dt>
+                                            <dd ng-show="lot.Plan.length">{{lot.Plan}}, {{lot.Block}}, {{lot.Lot}}</dd>
+                                            <dt ng-show="lot.Portion.length">ATS Description</dt>
+                                            <dd ng-show="lot.Portion.length">{{lot.Portion}} {{lot.Section}} {{lot.Township}} {{lot.Range}} {{lot.Meridian}}</dd>
+                                            <dt ng-show="lot.MunicipalAddress.length">Municipal Address</dt>
+                                            <dd ng-show="lot.MunicipalAddress.length">{{lot.MunicipalAddress}}</dd>
+                                            <dt ng-show="lot.ParcelAreaAcres != null">Parcel Area (acres)</dt>
+                                            <dd ng-show="lot.ParcelAreaAcres != null">{{lot.ParcelAreaAcres | number:2}}</dd>
+
+                                        </dl>
+                                    </div>
+                                    <div class="col-md-2  col-sm-12">
+                                        <a href="javascript:void(0);" class="btn  btn-primary" ng-click="editLotCollectionLot(lot)"> <i class="glyphicon glyphicon-pencil"></i></a>
+                                        <a href="javascript:void(0);" class="btn  btn-danger" ng-click="deleteLotCollectionLot(lot.LINC)"> <i class="glyphicon glyphicon-trash"></i></a>
+                                    </div>
+                                </li>
+
+                                <li>
+                                    <a href="javascript:void(0);" ng-click="addLot()" class="btn btn-labeled btn-primary"> <span class="btn-label"><i class="glyphicon glyphicon-plus"></i></span>Add Linc </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col col-4">
+                            <div ng-repeat="fieldSet in [fieldsetLotCollectionsLocation]" ng-include="'app/modules/global/views/template-fieldSet.html'"></div>
+                        </div>
+                    </div>    
+            </div>
+        </form>
+    </div>
+</div>

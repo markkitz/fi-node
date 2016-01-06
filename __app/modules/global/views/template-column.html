@@ -1,0 +1,98 @@
+﻿<label ng-if="column.showLabel">{{column.label}}</label>
+<label class="input" ng-class="{'state-error':column.isError}" ng-if="column.fieldType=='Numeric' || column.fieldType=='NumericArea'">
+    <input type="text" class="input-sm" ng-model="column.value" ng-blur="inputChanged(column)">
+</label>
+<label class="input" ng-if="column.fieldType=='HTMLInsert'">
+    <span compile-html="column.value | unsafe"></span>
+</label>
+<label class="input" ng-class="{'state-error':isValid=false}" ng-if="column.fieldType=='Date' || column.fieldType == 'DBColumnDate'">
+    <div class="input-group">
+        <input type="text" ng-model="column.value" ui-date="{nextText:'>>',prevText:'<<'}" placeholder="Select a date" data-smart-datepicker 
+              class="form-control datepicker" ng-change="inputChanged(column)"/>
+        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+    </div>
+</label>
+<div class="note note-error" ng-if="column.isError">{{column.errorMessage}}</div>
+<label ng-if="column.fieldType=='DropDown'">
+    <select ng-model="column.value" ng-options="opt.id as opt.value for opt in column.options" ng-change="inputChanged(column)">
+        <option value="null"></option>
+    </select>
+    <span ng-if="!column.isEnum"><a href="#" ng-click="editOptions(column)"><i class="fa fa-pencil"></i></a></span>
+</label>
+<div class="btn-group" ng-if="column.fieldType=='ButtonSelect' || column.fieldType=='DBColumnButtonSelect'">
+    <button type="button" class="btn btn-sm " ng-repeat="option in column.options" ng-class="{'btn-primary':option.id==column.value}"
+            ng-click="column.value=option.id;inputChanged(column)">
+        {{option.value}}
+    </button>
+</div>
+
+<input type="text" ng-blur="inputChanged(column)" ng-model="column.value" ng-if="column.fieldType=='String' || column.fieldType=='DBColumnString'">
+
+<label  ng-if="column.fieldType=='DBColumnBool'">
+   <input type="checkbox" ng-checked="column.value" ng-model="column.value" ng-click="inputChanged(column)">
+</label>
+<div ng-if="column.fieldType=='MultiSelect'">
+    <div class="checkbox" ng-repeat="option in column.multiSelectOptions">
+        <label>
+            <input type="checkbox" name="checkbox" ng-model="option.isChecked" ng-click="inputChanged(column, column.value)">
+            {{option.value}}
+        </label>
+    </div>
+    <span ng-if="!column.isEnum"><a href="#" ng-click="editOptions(column)"><i class="fa fa-pencil"></i> edit</a></span>
+
+</div>
+<div class="rating" ng-if="column.fieldType=='Stars'">
+    <input type="radio" name="stars-rating" id="stars-rating-5" ng-model="column.value" value="5" ng-click="inputChanged(column)">
+    <label for="stars-rating-5"><i class="fa fa-star"></i></label>
+    <input type="radio" name="stars-rating" id="stars-rating-4" ng-model="column.value" value="4" ng-click="inputChanged(column)">
+    <label for="stars-rating-4"><i class="fa fa-star"></i></label>
+    <input type="radio" name="stars-rating" id="stars-rating-3" ng-model="column.value" value="3" ng-click="inputChanged(column)">
+    <label for="stars-rating-3"><i class="fa fa-star"></i></label>
+    <input type="radio" name="stars-rating" id="stars-rating-2" ng-model="column.value" value="2" ng-click="inputChanged(column)">
+    <label for="stars-rating-2"><i class="fa fa-star"></i></label>
+    <input type="radio" name="stars-rating" id="stars-rating-1" ng-model="column.value" value="1" ng-click="inputChanged(column)">
+    <label for="stars-rating-1"><i class="fa fa-star"></i></label>
+    <div><a href="javascript:void(0)" ng-click="column.value = 0;inputChanged(column)">No Stars</a></div>
+</div>
+<div ng-if="column.fieldType=='Complex'">
+    {{column.value}}
+</div>
+<div ng-if="column.fieldType=='ImageBool'" style="background-color:#efefef;text-align:center;padding:10px">
+    <div ng-if="column.value =='True'">
+
+        <img ng-src="{{getImageThumbURL(column)}}" />
+        <div style="margin-top:10px">
+            <a class="btn btn-sm btn-danger" href="javascript:void(0);" ng-click="deleteImage(column)"><i class="glyphicon glyphicon-trash"></i> Delete</a>
+        </div>
+
+    </div>
+    <div ng-if="column.value !='True'">
+        <a href="javascript:void(0)" class="btn btn-primary  btn-sm" ng-click="addNewImage(column)">Add</a>
+    </div>
+</div>
+<div ng-if="column.fieldType=='FileLink'">
+    <div style="display:flex; max-width:300px;" ng-if="!column.value">        
+        <div style="flex:1"><a href="javascript:void(0)" ng-click="uploadFile(column)"><i class="fa fa-upload"></i>&nbsp;Upload</a> </div>
+        <div  style="flex:1"><a href="javascript:void(0)"  ng-click="addWebLink(column)"><i class="fa fa-link"></i>&nbsp;Add Web Link</a> </div>
+    </div>
+    <div style="display:flex; max-width:300px;" ng-if="column.value && column.value.indexOf('file:') >= 0">
+        <div  style="flex:1"><a href="{{AzureFileLocationUrl}}{{column.value.replace('file:', '')}}" target="_blank"><i class="fa fa-file"></i>&nbsp;download file</a></div>
+        <div style="flex:1"><a href="javascript:void(0)" class="btn btn-xs btn-danger" ng-click="removeLink(column)"><i class="fa fa-trash-o"></i>&nbsp;delete</a> </div>
+    </div>
+    <div style="display:flex; max-width:300px;" ng-if="column.value && column.value.indexOf('url:') >= 0">
+        <div style="flex:1"><a ng-href="{{getUrl(column)}}" target="_blank" ><i class="fa fa-link"></i>&nbsp;open web link</a> </div>
+        <div style="flex:1"><a href="javascript:void(0)" class="btn btn-xs btn-danger" ng-click="removeLink(column)"><i class="fa fa-trash-o"></i>&nbsp;delete</a> </div>
+    </div>
+    {{column.value.replace('file:', '')}}<br/>
+    {{AzureFileLocationUrl}}{{column.value}}
+</div>
+
+<select ng-model="column.value" ng-change="inputChanged(column)"  ng-if="column.fieldType=='Boolean'">
+    <option value="null"></option>
+    <option value="True">Yes</option>
+    <option value="False">No</option>
+</select>
+
+<label class="textarea textarea-resizable"  ng-if="column.fieldType=='RichText'">
+    <textarea rows="3" class="custom-scroll" ng-blur="inputChanged(column)" ng-model="column.value"></textarea>
+</label>

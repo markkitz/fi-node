@@ -1,0 +1,17 @@
+﻿
+    <div id="map_canvas" ng-init="initialize()">
+        <ui-gmap-google-map center="map.center" zoom="map.zoom" draggable="true" options="options" bounds="map.bounds">
+            <ui-gmap-polygon ng-repeat="poly in polygons track by $index" path="poly.location" visible="true" editable="false" draggable="false" fill="geoFill" stroke="geoStroke" events="polyEvents"></ui-gmap-polygon>
+            <ui-gmap-marker ng-repeat="marker in mapMarkers" idKey="marker.id" icon="marker.icon" options="marker.options"  coords="marker"  click="markerClick(marker)">
+                <ui-gmap-window show="marker.show"  options="windowOptions" closeClick="markerClose(marker)" ng-cloak="ng-cloak">
+                    <div>
+                        <div><strong>{{marker.address}}</strong></div>
+                        <div>Area: 3.5 arces</div>
+                        <div style="width:100px;height:30px;margin-top:5px"><a href="javascript:void(0);" ng-click="$parent.$parent.viewLot(this.idKey)" class="btn btn-xs btn-primary" ><i class="fa fa-info"></i> View</a></div>
+                    </div>
+                    
+                </ui-gmap-window>
+            </ui-gmap-marker>
+        </ui-gmap-google-map>
+    </div>
+

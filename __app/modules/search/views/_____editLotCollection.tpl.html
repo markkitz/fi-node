@@ -1,0 +1,106 @@
+﻿<div ng-init="initialize()">
+    <div class="jarviswidget" data-widget-editbutton="false" data-widget-fullscreenbutton="false" data-widget-custombutton="false" data-widget-sortable="false" role="widget" style="margin-bottom:0px">
+
+        <header role="heading">
+            <div class="jarviswidget-ctrls" role="menu">
+
+                <a href="javascript:void(0);" class="button-icon jarviswidget-delete-btn" rel="tooltip" title="" data-placement="bottom" data-original-title="Close" ng-click="EditorClose()">
+                    <i class="fa fa-times"></i>
+                </a>
+            </div>
+            <div class="widget-toolbar hidden-phone" role="menu">
+                <div class="smart-form">
+                    <label class="toggle">
+                        <input type="checkbox" id="demo-switch-to-pills" name="checkbox-toggle">
+                        <i data-swchon-text="TRUE" data-swchoff-text="FALSE"></i>Quick Edit
+                    </label>
+                </div>
+            </div>
+            <ul class="nav nav-tabs pull-left in">
+                <li>
+                    <a data-toggle="tab" href="#tabLotCollectionHistory">History</a>
+                </li>
+                <li>
+                    <a data-toggle="tab" href="#tabLotCollectionSales">Sales</a>
+                </li>
+
+                <li class="active">
+                    <a data-toggle="tab" href="#tabLotCollectionProfile">Profile</a>
+                </li>
+
+                <li>
+                    <a data-toggle="tab" href="#tabLotCollectionNotes">Notes</a>
+                </li>
+
+            </ul>
+            <span class="jarviswidget-loader"><i class="fa fa-refresh fa-spin"></i></span>
+        </header>
+
+        <!-- widget div-->
+        <div role="content">
+            <!-- end widget edit box -->
+            <!-- widget content -->
+            <div class="widget-body" id="lotCollectionEditorContentPanel" style="overflow-y: scroll;">
+                <form class="smart-form">
+                    <div class="tab-content">
+                        <div class="tab-pane " id="tabLotCollectionHistory">
+                            <h1>History</h1>
+                        </div>
+                        <div class="tab-pane " id="tabLotCollectionSales">
+                            <h1>Sales</h1>
+                        </div>
+                        <div class="tab-pane active" id="tabLotCollectionProfile">
+
+                            <div class="row">
+                                <div class="col col-8">
+                                    <h1>{{identifier.value}}</h1>
+                                    <div ng-repeat="fieldSet in [fieldsetLotCollectionsSettings]" ng-include="'app/modules/global/views/template-fieldSet.html'"></div>
+
+                                    <header>Lots</header>
+                                    <ul id="ulAddLincs">
+                                        <li class="row" ng-repeat="lot in collectionLots">
+                                            <div class="col-md-10 col-sm-12">
+                                                <dl class="dl-horizontal">
+                                                    <dt>LINC</dt>
+                                                    <dd>{{lot.LINC}}</dd>
+                                                    <dt ng-show="lot.Plan.length">Legal Description</dt>
+                                                    <dd ng-show="lot.Plan.length">{{lot.Plan}}, {{lot.Block}}, {{lot.Lot}}</dd>
+                                                    <dt ng-show="lot.Portion.length">ATS Description</dt>
+                                                    <dd ng-show="lot.Portion.length">{{lot.Portion}} {{lot.Section}} {{lot.Township}} {{lot.Range}} {{lot.Meridian}}</dd>
+                                                    <dt ng-show="lot.MunicipalAddress.length">Municipal Address</dt>
+                                                    <dd ng-show="lot.MunicipalAddress.length">{{lot.MunicipalAddress}}</dd>
+                                                    <dt ng-show="lot.ParcelAreaAcres != null">Parcel Area (acres)</dt>
+                                                    <dd ng-show="lot.ParcelAreaAcres != null">{{lot.ParcelAreaAcres | number:2}}</dd>
+
+                                                </dl>
+                                            </div>
+                                            <div class="col-md-2  col-sm-12">
+                                                <a href="javascript:void(0);" class="btn  btn-primary" ng-click="editLotCollectionLot(lot)"> <i class="glyphicon glyphicon-pencil"></i></a>
+                                                <a href="javascript:void(0);" class="btn  btn-danger" ng-click="deleteLotCollectionLot(lot.LINC)"> <i class="glyphicon glyphicon-trash"></i></a>
+                                            </div>
+                                        </li>
+
+                                        <li>
+                                            <a href="javascript:void(0);" ng-click="addLot()" class="btn btn-labeled btn-primary"> <span class="btn-label"><i class="glyphicon glyphicon-plus"></i></span>Add Linc </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="col col-4">
+                                    <div ng-repeat="fieldSet in [fieldsetLotCollectionsLocation]" ng-include="'app/modules/global/views/template-fieldSet.html'"></div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="tab-pane " id="tabLotCollectionNotes">
+                            <h1>Notes</h1>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <!-- end widget content -->
+
+        </div>                <!-- end widget div -->
+
+    </div>
+</div>

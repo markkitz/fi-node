@@ -1,0 +1,37 @@
+﻿
+<div ng-init="initialize()">
+    <style>
+       
+
+        .kf-PLAN,  .kf-BLOCK, .kf-LOT
+        {
+            width:80px;
+        }
+      
+       .kf-Portion, .kf-Section, .kf-Township, .kf-Range, .kf-Meridian
+       {
+           width:90px;
+       }
+       .kf-POSTALCODE
+       {
+           width:80px;
+       }
+       .kf-PARK select, .kf-SUBDIVISION select, .kf-LOCUS select
+       {
+           width:200px;
+       }
+       .kf-CUE input[type=text]
+       {
+           width:400px;
+       }
+
+
+    </style>
+    <div class="kf-flex-form-8-5">
+        <div  ng-repeat="fieldSet in [fieldSetLocation]" ng-include="'app/modules/global/views/template-fieldSet.html'"></div>
+        <div  ng-repeat="fieldSet in [fieldSetConfiguration]" ng-include="'app/modules/global/views/template-fieldSet.html'"></div>
+    </div>
+
+
+
+</div>

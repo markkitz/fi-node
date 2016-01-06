@@ -1,0 +1,74 @@
+﻿<style>
+    .tblSaleLINC {
+        min-width: 300px;
+        margin-bottom: 10px;
+    }
+
+        .tblSaleLINC td {
+            border-top: 1px solid #ccc;
+            border-bottom: 1px solid #ccc;
+            padding: 7px;
+        }
+
+        .tblSaleLINC tr {
+            min-height: 36px;
+        }
+
+        .tblSaleLINC td:last-child {
+            width: 50px;
+            text-align: right;
+        }
+
+        .kf-SALEFORECLOSURE select, .kf-SALEENDUSERPLAN select, .kf-SALEENDUSERMOTIVATION select, .kf-SALESUPPLYCHAINFUNCTION select, .kf-SALEENDUSERINDUSTRY select,
+        .kf-SALELAWFIRMORMINISTRY  select, .kf-SALEMORTGAGEE select,  .kf-SALEMORTGAGEBROKER  select, .kf-SALEREALTOR select, .kf-SALEREALESTATEBROKERAGE  select, .kf-SALEGENERALCONTRACTORSITE  select, 
+        .kf-SALEGENERALCONTRACTORBUILDING  select, .kf-SALEARCHITECT  select, .kf-SALEREALESTATEBROKERAGE select
+        {
+            width:230px;
+        }
+
+        .kf-SALELAWYERORAGENTNAME input[type=text], .kf-SALEVENDOR input[type=text], .kf-SALEREALTOR  input[type=text], .kf-CONSIDERATION input[type=text]
+        {
+            width:230px;
+        }
+        .kf-SALETRANSFERFILE, .kf-SALETITLEFILE
+        {
+            width:350px;
+        }
+        .kf-SALEREMARKS textarea
+        {
+            width:300px
+        }
+        .kf-EventDate
+        {
+            width:230px
+        }
+</style>
+<div  ng-init="initialize()" class="kf-flex-form-6-6">
+    <div>
+        <header>Key Data</header>
+        <div style="margin-top:20px;margin-left:20px">
+            <label class="label">LINCs involved in the sale</label>
+            <table class="tblSaleLINC">
+                <tr>
+                    <td><i class="fa fa-map-marker"></i> {{currentLotLinc }} <span style="color:#808080;font-size:10pt">(this lot)</span></td>
+                    <td></td>
+                </tr>
+                <tr ng-repeat="linc in otherLincs">
+                    <td><i class="fa fa-map-marker"></i> {{linc}}</td>
+                    <td><a ng-if="currentLotLinc != linc" href="javascript:void(0)" class="btn btn-sm btn-danger" ng-click="removeLINCFromSale(linc)"><i class="fa fa-trash-o "></i></a></td>
+                </tr>
+            </table>
+            <a href="javascript:void(0)" class="btn btn-primary btn-sm" ng-click="addLINC()">Add LINC</a>
+        </div>
+
+        <div ng-repeat="fieldSet in [fieldSetKeyData]" ng-include="'app/modules/global/views/template-rows.html'"></div>
+        <div ng-repeat="fieldSet in [fieldSetEndUseProfile]" ng-include="'app/modules/global/views/template-fieldSet.html'"></div>
+    </div>
+    <div>
+        <div ng-repeat="fieldSet in [fieldSetOwnerProfile]" ng-include="'app/modules/global/views/template-fieldSet.html'"></div>
+        <div ng-repeat="fieldSet in [fieldSetDevelopmentProfile]" ng-include="'app/modules/global/views/template-fieldSet.html'"></div>
+        <div ng-repeat="fieldSet in [fieldSetVendorProfile]" ng-include="'app/modules/global/views/template-fieldSet.html'"></div>
+        <div ng-repeat="fieldSet in [fieldSetLandTitles]" ng-include="'app/modules/global/views/template-fieldSet.html'"></div>
+        <div ng-repeat="fieldSet in [fieldSetRemarks]" ng-include="'app/modules/global/views/template-fieldSet.html'"></div>
+    </div>
+</div>

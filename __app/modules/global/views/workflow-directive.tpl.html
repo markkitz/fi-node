@@ -1,0 +1,22 @@
+﻿<div class="workflow" ng-show="workflowSteps.length > 0">
+    <hr />
+    <h3 style="margin-bottom: 5px;">Workflow</h3>
+    <label class="deadline" ng-if="deadline"><i class="fa fa-clock-o"></i> Deadline: {{deadline | jsonDate: 'MMM dd, yyyy'}}</label>
+    <ul class="steps">
+        <li ng-repeat="ws in workflowSteps" class="{{ws.completedBy || (ws.isNext && ws.allowDecisions.length == 0) ? 'done' : (ws.isNext ? 'current' : '')}}">
+            <span style="padding: 7px {{ws.step >= 10 ? '9px' : '13px'}};">{{ws.step}}</span>
+            <i ng-show="!$last"></i>
+            <div style="{{$last ? 'padding-top: 12px;' : ''}} width: {{(ws.allowDecisions.length - 1) * 100 + 400}}px;">
+                <b>{{ws.action}}</b>
+                <p ng-if="ws.completedBy">by {{ws.completedBy}} on {{ws.completedDate | jsonDate: 'MMM dd, yyyy'}}</p>
+                <p ng-if="!ws.completedBy && !$last">
+                    {{ws.userTitle}}{{ws.userCount >= 2 ? 's' : ''}}: {{ws.users ? (ws.userCount < 2 ? ws.users : '') : 'N/A'}}
+                    <text ng-if="ws.userCount >= 2"><br />{{ws.users}}</text>
+                </p>
+                <text ng-if="ws.isNext" class="step-action" style="margin-top: {{ws.userCount >= 2 ? '-53px' : '-35px'}};">
+                    <button ng-repeat="d in ws.allDecisions" class="btn btn-primary btn-xs" ng-disabled="ws.allowDecisions.indexOf(d) == -1" ng-click="workflowDecision(d)">{{d}}</button>
+                </text>
+            </div>
+        </li>
+    </ul>
+</div>

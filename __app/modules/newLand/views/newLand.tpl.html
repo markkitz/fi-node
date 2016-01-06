@@ -1,0 +1,47 @@
+﻿<div ng-init="initialize()" style="padding:30px">
+    <h2>New Lot</h2>
+    <div class="smart-form">
+        <section style="width:200px">
+            <label class="label">LINC</label>
+            <label class="input">
+                <input type="text" >
+            </label>
+        </section>
+    </div>
+
+    <a href="javascript:void(0);" ng-click="newLotClick()" class="btn btn-primary">Next >></a>
+
+
+    <div style="padding-bottom:15px">
+        <a href="javascript:void(0);" class="btn btn-primary btn-sm"  ng-click="addPolygon()" ng-hide="polygons[0].location.length > 0">Add Polygon</a>
+        <a href="javascript:void(0);" class="btn btn-danger btn-sm" ng-click="removePolygon()" ng-show="polygons[0].location.length > 0">Remove Polygon</a>
+        <a href="javascript:void(0);" class="btn btn-primary btn-sm"  ng-click="addPin()" ng-hide="marker.id == 1">Add Pin</a>
+        <a href="javascript:void(0);" class="btn btn-danger btn-sm"  ng-click="removePin()" ng-show="marker.id == 1">Remove Pin</a>
+    </div>
+    <div class="row">
+        <div class="col col-lg-12">
+            <div id="editMap" style="border:1px solid #ccc; height:550px">
+                <ui-gmap-google-map center="mapDto.center" zoom="mapDto.zoom" draggable="false" bounds="mapDto.bounds" options="mapDto.options">
+                    <ui-gmap-polygon ng-repeat="poly in polygons track by $index" path="poly.location" visible="true" editable="true" draggable="false" fill="geoFill" stroke="geoStroke" events="polyEvents"></ui-gmap-polygon>
+                    <ui-gmap-marker icon="marker.icon" coords="marker.coords" options="marker.options" events="marker.events" idkey="marker.id">
+                    </ui-gmap-marker>
+                </ui-gmap-google-map>
+            </div>
+        </div>
+    </div>
+    <h2>{{addressGetter}}</h2>
+    <div style="padding:20px;margin-top:20px">
+        <a href="javascript:void(0);" class="btn btn-primary  ng-scope" ng-click="getAddress()" ng-show="marker.id == 1">Get Google Info</a>
+        <div ng-hide="geoCodeAddress[0] == null">
+            <div><b>Address:</b> {{geoCodeAddress[0].formatted_address}}</div>
+            <div><b>Subdivision:</b> {{geoCodeAddress[1].address_components[0].long_name}}</div>
+            <div><b>Locus:</b> {{geoCodeAddress[2].address_components[0].long_name}}</div>
+            <div><b>Area:</b> {{area }}</div>
+            <hr/>
+            <div ng-repeat="p in geoCodeAddress[0].address_components">{{p}}</div>
+            <h3>c1</h3>
+            <div ng-repeat="p in geoCodeAddress[1].address_components">{{p}}</div>
+
+        </div>
+    </div>
+</div>
