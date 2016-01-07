@@ -1,4 +1,4 @@
-require('./test.js')
+import EventLogListCtrl from './EventLogListCtrl.js'
 console.log(EventLogListCtrl)
 
 angular.module('app.eventLog', ['ui.router']).config(function ($stateProvider) {
@@ -26,4 +26,5 @@ angular.module('app.eventLog', ['ui.router']).config(function ($stateProvider) {
       ;//<li><a ui-sref="eventLog.list">eventLog.list</a></li>
 })
 .controller('EventLogCtrl', EventLogListCtrl)
+.controller('ListCtrl', function(){})
 ;

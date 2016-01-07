@@ -1,5 +1,4 @@
 require('../src/app/eventLog/module.js')
-require('../src/app/eventLog/test.js')
 
 angular.module('app', ['app.eventLog', 'ui.router' ])
 // .config(function ($stateProvider, $urlRouterProvider) {
