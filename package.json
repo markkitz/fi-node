@@ -1,9 +1,9 @@
 {
   "name": "fi-node",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "main.js",
   "scripts": {
-    "start": "webpack-dev-server ./src/main.js --content-base src",
+    "start": "webpack-dev-server ./src/main.js --content-base src --display-error-details",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
