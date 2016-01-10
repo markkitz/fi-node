@@ -25,6 +25,6 @@ angular.module('app.eventLog', ['ui.router']).config(function ($stateProvider) {
       })
       ;//<li><a ui-sref="eventLog.list">eventLog.list</a></li>
 })
-.controller('EventLogCtrl', EventLogListCtrl)
+.controller('EventLogCtrl', function(){})
 .controller('ListCtrl', function(){})
 ;

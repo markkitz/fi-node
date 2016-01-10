@@ -1,9 +1,9 @@
-﻿define(["modules/eventLog/module"], function (module) {
+﻿define(["app.test"], function (module) {
     "use strict";
 
     module.registerController("EventLogListCtrl", ["$scope", "$state", "EventLogService", "$timeout", '$sce', function ($scope, $state, eventLogService, $timeout, $sce) {
-        
-        
+
+
         $scope.logs = [];
         $scope.isSearching = false;
         $scope.takeAmount = 20;
@@ -50,7 +50,7 @@
                     if (data.type) {
                         $scope.resultsFilter.push({ name: 'Event Type', value: data.type});
                     }
-                   
+
                     if (data.userName) {
                         $scope.resultsFilter.push({ name: 'User', value: data.userName });
                     }
@@ -61,7 +61,7 @@
                     $scope.skip = data.skip + data.take;
                     $scope.allLoaded = data.results.length < $scope.takeAmount;
                     $scope.totalRecords = data.totalRecords;
-                    
+
                     if (!$scope.allLoaded) {
                         $timeout(function () {
                             $scope.scrollHelper.refresh();
